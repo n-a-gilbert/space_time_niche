@@ -28,11 +28,11 @@ global <- expand.grid(
   dplyr::mutate(antag = ifelse(antag == 1, "P(Lethal Encounter): Low", 
                                ifelse(antag == 2, "P(Lethal Encounter): Medium", 
                                       "P(Lethal Encounter): High"))) %>% 
-  dplyr::mutate(antag = factor(antag, 
-                               levels = c(
-                                 "P(Lethal Encounter): Low",
-                                 "P(Lethal Encounter): Medium",
-                                 "P(Lethal Encounter): High"))) %>% 
+  mutate(antag = factor(antag,
+                        levels = c(
+                          "P(Lethal Encounter): High",
+                          "P(Lethal Encounter): Medium",
+                          "P(Lethal Encounter): Low"))) %>% 
   dplyr::group_by(antag) %>% 
   dplyr::summarise(mean = mean(difference), 
                    sd = sd(difference))
@@ -71,13 +71,13 @@ pair <- expand.grid(
   dplyr::mutate(pair = tolower(pair)) %>% 
   # factor pair so they are arranged in order of effect size on y-axis
   dplyr::mutate(pair = factor(pair, levels = unique(pair))) %>% 
-  dplyr::mutate(antag = factor(antag,
-                               levels = c(
-                                 "P(Lethal Encounter): Low",
-                                 "P(Lethal Encounter): Medium",
-                                 "P(Lethal Encounter): High")))  
+  mutate(antag = factor(antag,
+                        levels = c(
+                          "P(Lethal Encounter): High",
+                          "P(Lethal Encounter): Medium",
+                          "P(Lethal Encounter): Low")))
 
-pal <- viridisLite::inferno(n = 3, begin = 0.15, end = 0.7)
+pal <- viridisLite::inferno(n = 3, begin = 0.7, end = 0.15)
 
 ggplot() +
   geom_vline(xintercept = 0, color = "red") + 
@@ -91,7 +91,7 @@ ggplot() +
             alpha = 0.2) +
   scale_fill_manual("P(Lethal Encounter)",
                     values = pal, 
-                    labels = c("Low", "Medium", "High")) +
+                    labels = c("High", "Medium", "Low")) +
   geom_errorbar(data = pair, 
                 aes(y = pair, 
                     xmin = mean - sd, 
@@ -110,9 +110,9 @@ ggplot() +
                  color = antag)) +
   scale_color_manual("P(Lethal Encounter)",
                      values = pal, 
-                     labels = c("Low", "Medium", "High")) + 
-  facet_wrap(~antag) +
-  labs(x = "Difference in predicted average time-between-detection \n between low- and high-disturbance sites (days)") + 
+                     labels = c("High", "Medium", "Low")) + 
+  facet_grid(antag ~ ., scales = "free_y", space = "free_y") +
+  labs(x = "Difference in detection time between\n low- and high-disturbance sites (days)") + 
   theme(axis.title.y = element_blank(),
         axis.line = element_line(size = 0.1, 
                                  color = "gray20"), 
@@ -132,5 +132,6 @@ ggplot() +
         strip.background = element_blank(), 
         strip.text = element_blank(),
         legend.position = "bottom",
-        legend.margin = margin(0, 0, 0, 0), 
+        legend.justification = "left",
+        legend.margin = margin(0, 0, 0, -50), 
         legend.box.margin = margin(-5, -10, -5, -10))
