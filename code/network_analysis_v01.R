@@ -83,10 +83,13 @@ prop_df <-
 # write_csv(density_df, "space_time_network_density_v01.csv")
 # write_csv(prop_df, "space_time_network_proportions_v01.csv")
 
+density_df <- read_csv("space_time_network_density_v01.csv")
+prop_df <- read_csv("space_time_network_proportions_v01.csv")
+
 # network density analysis
 # ART a few minutes
 density_model <-  
-  brms::brm(density ~ x + x2 + season + season:x + season:x2,
+  brms::brm(density ~ x + season + season:x,
       data = density_df,
       family = zero_one_inflated_beta(),
       prior = c(
@@ -99,7 +102,7 @@ density_model <-
 # network proportion models
 # each takes a few minutes to run
 prop1_model <- 
-  brms::brm(prop ~ x + x2 + season + x:season + x2:season,
+  brms::brm(prop ~ x + season + x:season,
       data = filter(prop_df, antag == 1),
       family = zero_one_inflated_beta(),
       prior = c(
@@ -110,7 +113,7 @@ prop1_model <-
       cores = 3)
 
 prop2_model <- 
-  brms::brm(prop ~ x + x2 + season + x:season + x2:season,
+  brms::brm(prop ~ x + season + x:season,
             data = filter(prop_df, antag == 2),
             family = zero_one_inflated_beta(),
             prior = c(
@@ -121,7 +124,7 @@ prop2_model <-
             cores = 3)
 
 prop3_model <- 
-  brms::brm(prop ~ x + x2 + season + x:season + x2:season,
+  brms::brm(prop ~ x + season + x:season,
             data = filter(prop_df, antag == 3),
             family = zero_one_inflated_beta(),
             prior = c(
