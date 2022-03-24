@@ -2,7 +2,7 @@ library(here)
 library(tidyverse)
 library(brms)
 library(tidybayes)
-library(viridisLite)
+library(MetBrewer)
 
 setwd(here::here("results"))
 mod <- readRDS("pair_analysis_results_v01.rds")
@@ -14,7 +14,7 @@ d <- read_csv("space_time_pair_ttd_data_v01.csv")
 global <- expand.grid(
   x = c(min(d$x), max(d$x)), 
   antag = unique(d$antag)) %>% 
-  dplyr::mutate(x2 = x*x) %>% 
+  # dplyr::mutate(x2 = x*x) %>% 
   tidybayes::add_linpred_draws(mod,
                                re_formula = NA, 
                                scale = "response", 
@@ -35,17 +35,20 @@ global <- expand.grid(
                           "P(Lethal Encounter): Low"))) %>% 
   dplyr::group_by(antag) %>% 
   dplyr::summarise(mean = mean(difference), 
-                   sd = sd(difference))
+                   lower95 = quantile(difference, c(0.025)), 
+                   upper95 = quantile(difference, c(0.975)),
+                   lower68 = quantile(difference, c(0.160)), 
+                   upper68 = quantile(difference, c(0.840)))
 
 # for each pair, calculate the difference in simulated detection time between low- and high-disturbance sites
 pair <- expand.grid(
   pair = unique(d$pair), 
   x = c(min(d$x), max(d$x))) %>% 
-  dplyr::mutate(x2 = x*x) %>% 
-  dplyr::left_join( dplyr::distinct(dplyr::select(d, pair, antag))) %>% 
+  # dplyr::mutate(x2 = x*x) %>% 
+  dplyr::left_join( dplyr::distinct(dplyr::select(d, pair, antag))) %>%
   tibble::as_tibble() %>% 
   tidybayes::add_linpred_draws(mod, 
-                               re_formula = ~(1 + x + x2 | pair), 
+                               re_formula = ~(1 + x | pair), 
                                scale = "response", 
                                n = 1000) %>% 
   dplyr::ungroup(.) %>%
@@ -59,7 +62,10 @@ pair <- expand.grid(
                                       "P(Lethal Encounter): High"))) %>% 
   dplyr::group_by(pair, antag) %>% 
   dplyr::summarise(mean = mean(difference),
-                   sd = sd(difference)) %>%
+                   lower95 = quantile(difference, c(0.025)), 
+                   upper95 = quantile(difference, c(0.975)),
+                   lower68 = quantile(difference, c(0.160)), 
+                   upper68 = quantile(difference, c(0.840))) %>%
   dplyr::arrange(mean) %>% 
   dplyr::ungroup(.) %>% 
   # clean up some names
@@ -77,13 +83,13 @@ pair <- expand.grid(
                           "P(Lethal Encounter): Medium",
                           "P(Lethal Encounter): Low")))
 
-pal <- viridisLite::inferno(n = 3, begin = 0.7, end = 0.15)
+pal <-  MetBrewer::MetPalettes$Demuth[[1]][c(8, 4, 2)]
 
 ggplot() +
   geom_vline(xintercept = 0, color = "red") + 
   geom_rect(data = global,
-            aes(xmin = mean - 2*sd, 
-                xmax = mean + 2*sd,
+            aes(xmin = lower95, 
+                xmax = upper95,
                 fill = antag), 
             ymin = -Inf, 
             ymax = Inf,
@@ -94,14 +100,14 @@ ggplot() +
                     labels = c("High", "Medium", "Low")) +
   geom_errorbar(data = pair, 
                 aes(y = pair, 
-                    xmin = mean - sd, 
-                    xmax = mean + sd,
+                    xmin = lower68, 
+                    xmax = upper68,
                     color = antag),
                 width = 0, size = 1) + 
   geom_errorbar(data = pair, 
                 aes(y = pair, 
-                    xmin = mean - 2*sd,
-                    xmax = mean + 2*sd,
+                    xmin = lower95,
+                    xmax = upper95,
                     color = antag), 
                 width = 0, size = 0.5) +
   geom_point(data = pair, 

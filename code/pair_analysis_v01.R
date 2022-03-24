@@ -22,9 +22,9 @@ d <- readr::read_csv("space_time_pair_ttd_data_v01.csv")
 start <- Sys.time()
 mod <- brms::brm(data    = d,
                  family  = Gamma(link = "log"), 
-                 formula = ttd ~ 1 + x + x2 + mo(antag) + mo(antag):x + mo(antag):x2 + ( 1 + x + x2 |  pair / season ),
-                 prior   = c(prior(normal(0, 5), class = Intercept), 
-                             prior(normal(0, 1), class = b),
+                 formula = ttd ~ 1 + x + mo(antag) + mo(antag):x + ( 1 + x |  pair / season ),
+                 prior   = c(prior(normal(7.5, 2), class = Intercept), 
+                             prior(normal(0, 0.5), class = b),
                              prior(exponential(1), class = sd), 
                              prior(lkj(2), class = cor),
                              prior(exponential(1), class = shape)), 
