@@ -1,7 +1,7 @@
 library(here)
 library(tidyverse)
 library(tidybayes)
-library(viridisLite)
+library(MetBrewer)
 
 setwd(here::here("results"))
 mod <- readRDS("pair_analysis_results_v01.rds")
@@ -13,7 +13,6 @@ global <- expand.grid(x = seq(from = min(d$x),
                               to = max(d$x),
                               by = 0.1), 
                       antag = unique(d$antag)) %>% 
-  dplyr::mutate(x2 = x*x) %>% 
   tibble::as_tibble() %>% 
   tidybayes::add_linpred_draws(mod, 
                                re_formula = NA, 
@@ -30,7 +29,8 @@ global <- expand.grid(x = seq(from = min(d$x),
                    lower = quantile(y, c(0.025)), 
                    upper = quantile(y, c(0.975)))
 
-pal <- viridisLite::inferno(n = 3, begin = 0.7, end = 0.15)
+pal <-  MetBrewer::MetPalettes$Demuth[[1]][c(8, 4, 2)]
+xvals <- c(min(global$x) + 0.25, max(global$x) - 0.25)
 
 ggplot(data = global, aes(x = x, y = mean, color = antag_lab, fill = antag_lab)) +
   geom_ribbon(aes(ymin = lower, ymax = upper), color = NA, alpha = 0.4) +
@@ -39,7 +39,7 @@ ggplot(data = global, aes(x = x, y = mean, color = antag_lab, fill = antag_lab))
                      values = pal) +
   scale_fill_manual("P(Lethal Encounter)",
                     values = pal) +
-  scale_x_continuous(breaks = c(-2.3, 2.9),
+  scale_x_continuous(breaks = xvals,
                      labels = c("Low", "High")) +
   labs(y = "Time between detections (days)", 
        x = "Human disturbance (5km)") + 
