@@ -10,17 +10,17 @@ Human disturbance may fundamentally alter the way that species interact, a prosp
 
 ## Repository Directory
 
-### [code](./code)
-pair_analysis_v01.R - code to run the pair models
-network_density_analysis_v01.R - code to run the network connectance models
-network_proportion_analysis_v01.R - code to run the network proportion (of each antagonism level) models
-create_networks_v01.R - code demonstrating how networks were created and statistics derived from them
-calculate_activity_pattern_overlap_v01.R - code demonstrating how activity pattern overlap was calculated; also contains code for Fig. 4 and Fig. S7
-figure_02.R - code to create figure 2
-figure_03.R - code to create figure 3
-antagonism_proportion_figures_v01.R - code to create plots of model predictions for antagonsim proportions in network - used to create Fig. 5c and Fig. S9
-network_connectance_figure_v01.R - code to create plots of model predictions for network connectance - used to create Fig. 5b and Fig. S8
-figure_05c_example_network.R - code to create Fig. 5c visualizing an example network
+### [code](./code): Contains code for modeling and generating figures
+* pair_analysis_v01.R - code to run the pair models
+* network_density_analysis_v01.R - code to run the network connectance models
+* network_proportion_analysis_v01.R - code to run the network proportion (of each antagonism level) models
+* create_networks_v01.R - code demonstrating how networks were created and statistics derived from them
+* calculate_activity_pattern_overlap_v01.R - code demonstrating how activity pattern overlap was calculated; also contains code for Fig. 4 and Fig. S7
+* figure_02.R - code to create figure 2
+* figure_03.R - code to create figure 3
+* antagonism_proportion_figures_v01.R - code to create plots of model predictions for antagonsim proportions in network - used to create Fig. 5c and Fig. S9
+* network_connectance_figure_v01.R - code to create plots of model predictions for network connectance - used to create Fig. 5b and Fig. S8
+* figure_05c_example_network.R - code to create Fig. 5c visualizing an example network
 
 ## data
 detection_time_DAPS_v01.RData - data used to calculate daily activity pattern overlap. Pre-processed to be thinned so that detections of a species are at least 30 minutes from another (standard practice for such analyses) and detection times converted to suntime to account for seasonal variation in daylength
