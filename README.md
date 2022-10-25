@@ -22,17 +22,17 @@ Human disturbance may fundamentally alter the way that species interact, a prosp
 * network_connectance_figure_v01.R - code to create plots of model predictions for network connectance - used to create Fig. 5b and Fig. S8
 * figure_05c_example_network.R - code to create Fig. 5c visualizing an example network
 
-## data
-detection_time_DAPS_v01.RData - data used to calculate daily activity pattern overlap. Pre-processed to be thinned so that detections of a species are at least 30 minutes from another (standard practice for such analyses) and detection times converted to suntime to account for seasonal variation in daylength
-supplement_pairwise_data_v01.RData - data for pairwise analysis
-network_antag_proportions_v02.csv - network stats: proportion of each antagonism classification in each network
-network_connectance_v01.csv - network stat: connectance of each network
-df_to_make_example_networks_v01.csv - dataframe to create an example network visualization
+### [data](./data): Contains data, processed to remove geographic coordinates to protect privacy of volunteers
+* detection_time_DAPS_v01.RData - data used to calculate daily activity pattern overlap. Pre-processed to be thinned so that detections of a species are at least 30 minutes from another (standard practice for such analyses) and detection times converted to suntime to account for seasonal variation in daylength
+* supplement_pairwise_data_v01.RData - data for pairwise analysis
+* network_antag_proportions_v02.csv - network stats: proportion of each antagonism classification in each network
+* network_connectance_v01.csv - network stat: connectance of each network
+* df_to_make_example_networks_v01.csv - dataframe to create an example network visualization
 
-## results
-connectance_model_results - folder with model output of connectance models (5 models for the different temporal scales)
-proportion_model_results - folder with model output of antagonism proportion models (15 models; 5 temporal scales x 3 antagonism rankings)
-ghm5k_antag_rai_v01.RDS - model object for relative abundance model
-ghm5k_antag_v01.RDS - model object for primary model
-ghm5k_mean_sd_antag_v01.RDS - model object for heterogeneity model
+### [results](./results): Contains model output
+* connectance_model_results - folder with model output of connectance models (5 models for the different temporal scales)
+* proportion_model_results - folder with model output of antagonism proportion models (15 models; 5 temporal scales x 3 antagonism rankings)
+* ghm5k_antag_rai_v01.RDS - model object for relative abundance model
+* ghm5k_antag_v01.RDS - model object for primary model
+* ghm5k_mean_sd_antag_v01.RDS - model object for heterogeneity model
 
