@@ -1,8 +1,16 @@
-# Data and code from Gilbert et al, "Human disturbance compresses the spatiotemporal niche"
+# Human disturbance compresses the spatiotemporal niche
 
-Processed data (raw data cannot be shared since location information from Snapshot Wisconsin volunteers is private) is located in the "data" folder. The code folder contains scripts to run models and to reproduce figures.
+### [Neil A. Gilbert](https://gilbertecology.com), Jennifer L. Stenglein, [Jonathan N. Pauli](https://pauli.russell.wisc.edu/), & [Benjamin Zuckerberg](https://zuckerberg.russell.wisc.edu/)
 
-## code
+#### Please contact the first author for questions about the code or data: Neil A. Gilbert (neil.allen.gilbert@gmail.com)
+__________________________________________________________________________________________________________________________________________
+
+## Abstract:  
+Human disturbance may fundamentally alter the way that species interact, a prospect that remains poorly understood. We investigated whether anthropogenic landscape modification increases or decreases co-occurrence—a prerequisite for species interactions—within wildlife communities. Using 4 years of data from >2,000 camera traps across a human disturbance gradient in Wisconsin, USA, we considered 74 species pairs (classifying pairs as low-, medium-, or high-antagonism to account for different interaction types) and used the time between successive detections of pairs as a measure of their co-occurrence probability and to define co-occurrence networks. Pairs averaged 6.1 [95% CI: 5.3, 6.8] days between detections in low-disturbance landscapes (e.g., national forests) but 4.1 [3.5, 4.7] days between detections in high-disturbance landscapes, such as those dominated by urbanization or intensive agriculture. Co-occurrence networks showed higher connectance (i.e., a larger proportion of the possible co-occurrences) and greater proportions of low-antagonism pairs in disturbed landscapes. Human-mediated increases in species abundance (possibly via resource subsidies) appeared more important than behavioral mechanisms (e.g., changes in daily activity timing) in driving these patterns of compressed co-occurrence in disturbed landscapes. The spatiotemporal compression of species co-occurrences in disturbed landscapes likely strengthens interactions like competition, predation, and infection unless species can avoid each other at fine spatiotemporal scales. Regardless, human-mediated increases in co-occurrence with—and hence increased exposure to—predators or competitors might elevate stress levels in individual animals, with possible cascading effects across populations, communities, and ecosystems.
+
+## Repository Directory
+
+### [code](./code)
 pair_analysis_v01.R - code to run the pair models
 network_density_analysis_v01.R - code to run the network connectance models
 network_proportion_analysis_v01.R - code to run the network proportion (of each antagonism level) models
