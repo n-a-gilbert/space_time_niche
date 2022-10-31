@@ -21,6 +21,7 @@ Human disturbance may fundamentally alter the way that species interact, a prosp
 * antagonism_proportion_figures_v01.R - code to create plots of model predictions for antagonsim proportions in network - used to create Fig. 5c and Fig. S9
 * network_connectance_figure_v01.R - code to create plots of model predictions for network connectance - used to create Fig. 5b and Fig. S8
 * figure_05c_example_network.R - code to create Fig. 5c visualizing an example network
+* spatial_autocorrelation_v01.R - code to check spatial autocorrelation in model residuals 
 
 ### [data](./data): Contains data, processed to remove geographic coordinates to protect privacy of volunteers
 * detection_time_DAPS_v01.RData - data used to calculate daily activity pattern overlap. Pre-processed to be thinned so that detections of a species are at least 30 minutes from another (standard practice for such analyses) and detection times converted to suntime to account for seasonal variation in daylength
