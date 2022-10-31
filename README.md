@@ -2,6 +2,8 @@
 
 ### [Neil A. Gilbert](https://gilbertecology.com), Jennifer L. Stenglein, [Jonathan N. Pauli](https://pauli.russell.wisc.edu/), & [Benjamin Zuckerberg](https://zuckerberg.russell.wisc.edu/)
 
+### Data/code DOI: [![DOI](https://zenodo.org/badge/467182356.svg)](https://zenodo.org/badge/latestdoi/467182356)
+
 #### Please contact the first author for questions about the code or data: Neil A. Gilbert (neil.allen.gilbert@gmail.com)
 __________________________________________________________________________________________________________________________________________
 
